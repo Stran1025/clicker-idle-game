@@ -1,9 +1,11 @@
 const data = {
-  wallet: 0
+  blocks: 0
 };
 
 const $block = document.querySelector('#block');
+const $display = document.querySelector('#block-display');
 $block.addEventListener('click', event => increment(data, 1));
 function increment(data, rate) {
-  data.wallet += rate;
+  data.blocks += rate;
+  $display.textContent = data.blocks;
 }
