@@ -4,17 +4,19 @@ const data = {
   pickaxe: {
     count: 0,
     price: 10,
-    increaseRate: 1.05,
-    acceleration: 0.05
+    increaseRate: 1.1
   },
   miner: {
     count: 0,
     price: 20,
-    increaseRate: 1.1,
-    acceleration: 0.075
+    increaseRate: 1.15,
+    ratePerTime: 0,
+    time: 10
   }
-
 };
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
 const $block = document.querySelector('#block');
 const $display = document.querySelector('#block-display');
@@ -49,21 +51,25 @@ function buyPickaxe() {
   data.pickaxe.count++;
   $pickaxeCount.textContent = data.pickaxe.count;
   data.clickRate++;
-  data.pickaxe.increaseRate += data.pickaxe.acceleration;
   $pickaxePrice.textContent = data.pickaxe.price;
   $display.textContent = data.blocks;
 }
 
 function buyMiner() {
-  if (data.blocks < data) {
+  if (data.blocks < data.miner.price) {
     return;
   }
   data.blocks -= data.miner.price;
   data.miner.price *= data.miner.increaseRate;
   data.miner.price = Math.trunc(data.miner.price);
   data.miner.count++;
+  data.miner.ratePerTime += 1;
   $minerCount.textContent = data.miner.count;
-  data.miner.increaseRate += data.miner.acceleration;
   $minerPrice.textContent = data.miner.price;
   $display.textContent = data.blocks;
 }
+
+const minerTimer = setInterval(() => {
+  data.blocks += data.miner.ratePerTime;
+  $display.textContent = data.blocks;
+}, 10000);
