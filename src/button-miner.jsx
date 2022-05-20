@@ -18,6 +18,8 @@ class MinerButton extends React.Component {
       <div className='row justify-content-center mt-5'>
         <div className='col-1 align-self-center'>
           <button className='btn btn-primary w-100' onClick={this.handleMining}>Mine</button>
+          <h2 className="w-100 text-center">{this.state.count}</h2>
+          <h2 className="badge bg-info text-dark w-100">blocks</h2>
         </div>
       </div>
     );
