@@ -3,14 +3,12 @@ import React from 'react';
 class MinerButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0 };
+    this.state = { count: this.props.data.wallet };
     this.handleMining = this.handleMining.bind(this);
   }
 
   handleMining() {
-    let c = this.state.count;
-    c++;
-    this.setState({ count: c });
+    this.setState({ count: this.props.data.wallet++ });
   }
 
   render() {

@@ -8,7 +8,15 @@ class PurchasableCard extends React.Component {
   }
 
   handlePurchase() {
-
+    if (this.props.data.wallet < this.state.price) {
+      return;
+    }
+    this.props.data.wallet -= this.state.price;
+    let c = this.state.count;
+    c++;
+    let p = this.state.price;
+    p += 10;
+    this.setState({ count: c, price: p });
   }
 
   render() {
